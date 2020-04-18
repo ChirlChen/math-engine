@@ -60,6 +60,7 @@ func TestParseAndExecSimple(t *testing.T) {
 		{"min(2^3,3^2)", 8},
 		{"noerr(1/0)", 0},
 		{"noerr(1/(1-1))", 0},
+		{"log(1)", 0}
 	}
 	for _, e := range exprs {
 		r, _ := ParseAndExec(e.Expr)

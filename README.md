@@ -1,17 +1,19 @@
-## Math-Engine  
+## Math-Engine
 
-[![Build Status](https://travis-ci.org/dengsgo/math-engine.svg?branch=master)](https://travis-ci.org/dengsgo/math-engine)  [![Go Report Card](https://goreportcard.com/badge/github.com/dengsgo/math-engine)](https://goreportcard.com/report/github.com/dengsgo/math-engine)  [![godoc.org](https://godoc.org/github.com/dengsgo/math-engine/engine?status.svg)](https://godoc.org/github.com/dengsgo/math-engine/engine)  
+[![Build Status](https://travis-ci.org/dengsgo/math-engine.svg?branch=master)](https://travis-ci.org/dengsgo/math-engine)  [![Go Report Card](https://goreportcard.com/badge/github.com/dengsgo/math-engine)](https://goreportcard.com/report/github.com/dengsgo/math-engine)  [![godoc.org](https://godoc.org/github.com/dengsgo/math-engine/engine?status.svg)](https://godoc.org/github.com/dengsgo/math-engine/engine)
 
-使用 Go 实现的数学表达式解析计算引擎库，无任何依赖，相对比较完整的完成了数学表达式解析执行，包括词法分析、语法分析、构建AST、运行。  
+fork from https://github.com/dengsgo/math-engine
 
-`go get -u github.com/dengsgo/math-engine`  
+使用 Go 实现的数学表达式解析计算引擎库，无任何依赖，相对比较完整的完成了数学表达式解析执行，包括词法分析、语法分析、构建AST、运行。
 
-能够处理的表达式样例：  
-- `1+127-21+(3-4)*6/2.5`  
-- `(88+(1+8)*6)/2+99`  
-- `123_345_456 * 1.5 - 2 ^ 4`  
-- `-4 * 6 + 2e2 - 1.6e-3`  
-- `sin(pi/2)+cos(45-45*1)+tan(pi/4)`  
+`go get -u github.com/chirlchen/math-engine`
+
+能够处理的表达式样例：
+- `1+127-21+(3-4)*6/2.5`
+- `(88+(1+8)*6)/2+99`
+- `123_345_456 * 1.5 - 2 ^ 4`
+- `-4 * 6 + 2e2 - 1.6e-3`
+- `sin(pi/2)+cos(45-45*1)+tan(pi/4)`
 - `99+abs(-1)-ceil(88.8)+floor(88.8)`
 - `max(min(2^3, 3^2), 10*1.5-7)`
 
@@ -48,22 +50,22 @@
 | `max(x, y)` | x, y 中的较大值              | max(2, 3) = 3                         |
 | `min(x, y)` | x, y 中的较小值              | min(2, 3) = 2                         |
 | `noerr(x)`  | 计算 x 出错时返回 0          | noerr(1 / 1)  = 1, noerr( 1/ 0 ) = 0  |
+| `log(x)`  | 对数函数, log          |  log(1) = 0  |
 
+## Usage
 
-## Usage  
-
-你可以直接引用该库嵌入到自己的程序中：  
+你可以直接引用该库嵌入到自己的程序中：
 ```bash
-go get -u github.com/dengsgo/math-engine
+go get -u github.com/chirlchen/math-engine
 ```
-在代码中引入：  
+在代码中引入：
 ```go
-import "github.com/dengsgo/math-engine/engine"
+import "github.com/chirlchen/math-engine/engine"
 ```
 e.g. 1 直接调用解析执行函数 :
 
 ```go
-import "github.com/dengsgo/math-engine/engine"
+import "github.com/chirlchen/math-engine/engine"
 
 func main() {
   s := "1 + 2 * 6 / 4 + (456 - 8 * 9.2) - (2 + 4 ^ 5)"
@@ -78,10 +80,10 @@ func main() {
 
 
 
-e.g. 2 依次调用函数，手动执行 :  
+e.g. 2 依次调用函数，手动执行 :
 
 ```go
-import "github.com/dengsgo/math-engine/engine"
+import "github.com/chirlchen/math-engine/engine"
 
 func main() {
 	s := "1 + 2 * 6 / 4 + (456 - 8 * 9.2) - (2 + 4 ^ 5)"
@@ -116,7 +118,7 @@ func exec(exp string) {
 	fmt.Printf("%s = %v\n", exp, r)
 }
 ```
-编译运行，应该可以看到如下输出：  
+编译运行，应该可以看到如下输出：
 ```bash
 ExprAST: {Op:- Lhs:{Op:+ Lhs:{Op:+ Lhs:{Val:1} Rhs:{Op:/ Lhs:{Op:* Lhs:{Val:2} Rhs:{Val:6}} Rhs:{Val:4}}} Rhs:{Op:- Lhs:{Val:456} Rhs:{Op:* Lhs:{Val:8} Rhs:{Val:9.2}}}} Rhs:{Op:+ Lhs:{Val:2} Rhs:{Op:^ Lhs:{Val:4} Rhs:{Val:5}}}}
 progressing ...  -639.6
@@ -130,7 +132,7 @@ progressing ...  -639.6
 你可以通过设置 `TrigonometricMode` 调整参数类型，可选 弧度`RadianMode`、角度`AngleMode`，e.g. :
 
 ```go
-import "github.com/dengsgo/math-engine/engine"
+import "github.com/chirlchen/math-engine/engine"
 
 func main() {
   s := "1 + sin(90)"
@@ -144,9 +146,9 @@ func main() {
 
 
 
-## Compile    
+## Compile
 
-go version 1.12  
+go version 1.12
 ```go
 # Compile Demo
 go test
@@ -154,31 +156,31 @@ go build
 ./math-engine
 ```
 
-也可以直接下载已编译好的二进制文件，直接运行：  
+也可以直接下载已编译好的二进制文件，直接运行：
 
-[Github Releases](https://github.com/dengsgo/math-engine/releases)  
+[Github Releases](https://github.com/dengsgo/math-engine/releases)
 
-## 实现细节    
+## 实现细节
 
-请阅读我的博客文章：[用 Go 实现一个完整的数学表达式计算引擎](https://www.yoytang.com/math-expression-engine.html)  
+请阅读我的博客文章：[用 Go 实现一个完整的数学表达式计算引擎](https://www.yoytang.com/math-expression-engine.html)
 
-## TODO  
-### 已实现  
+## TODO
+### 已实现
 
-- [x] 加 `+`  
-- [x] 减 `-`  
-- [x] 乘 `*`  
-- [x] 除 `/`  
-- [x] 取余 `%`  
-- [x] 整数次方 `^`  
+- [x] 加 `+`
+- [x] 减 `-`
+- [x] 乘 `*`
+- [x] 除 `/`
+- [x] 取余 `%`
+- [x] 整数次方 `^`
 - [x] 科学计数法 e.g. `1.2e7`、  `1.2e-7`
-- [x] 括号 `()`  
-- [x] 混合运算 e.g. `1+2*6/4+(456-8*9.2)-(2+4^5)*2e3+1.2e-2`  
-- [x] 友好的长数字 e.g. `123_456_789`  
+- [x] 括号 `()`
+- [x] 混合运算 e.g. `1+2*6/4+(456-8*9.2)-(2+4^5)*2e3+1.2e-2`
+- [x] 友好的长数字 e.g. `123_456_789`
 - [x] 三角函数 e.g. `sin, cos, tan, cot, sec, csc`
 - [x] 常量 pi
 - [x] 辅助函数 e.g. `abs, ceil, floor, sqrt, cbrt, max, min, noerr`
-- [x] 友好的错误消息 e.g.    
+- [x] 友好的错误消息 e.g.
 ```bash
 input /> 123+89-0.0.9
 ERROR: strconv.ParseFloat: parsing "0.0.9": invalid syntax
@@ -189,7 +191,7 @@ want '(' or '0-9' but get '0.0.9'
 ------------
 ```
 
-### 待实现  
+### 待实现
 
-- [ ] 精确浮点计算    
+- [ ] 精确浮点计算
 - [ ] 更多辅助函数

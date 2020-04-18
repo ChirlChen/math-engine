@@ -28,6 +28,7 @@ var defFunC = map[string]int{
 	"round": 1,
 	"sqrt":  1,
 	"cbrt":  1,
+	"log":   1,
 
 	"noerr": 1,
 
@@ -52,12 +53,18 @@ func init() {
 		"round": defRound,
 		"sqrt":  defSqrt,
 		"cbrt":  defCbrt,
+		"log":   defLog,
 
 		"noerr": defNoerr,
 
 		"max": defMax,
 		"min": defMin,
 	}
+}
+
+// log(1) = 0
+func defLog(expr []ExprAST) float64 {
+	return math.Log(ExprASTResult(expr[0]))
 }
 
 // sin(pi/2) = 1

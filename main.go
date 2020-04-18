@@ -3,10 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/dengsgo/math-engine/engine"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/ChirlChen/math-engine/engine"
 )
 
 func main() {

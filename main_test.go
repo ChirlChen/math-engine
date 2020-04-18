@@ -96,3 +96,11 @@ func TestExecS(t *testing.T) {
 	exp := "noerr(3.8 - 56 / (1-1) - 4)"
 	exec(exp)
 }
+
+func TestExecT(t *testing.T) {
+	exp := "log(1)"
+	exec(exp)
+
+	exp = "log(2)"
+	exec(exp)
+}
